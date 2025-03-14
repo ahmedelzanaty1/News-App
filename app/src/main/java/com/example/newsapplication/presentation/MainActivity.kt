@@ -7,13 +7,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.example.newsapplication.conestant.Route
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.newsapplication.presentation.screens.categoryscreen.CategoryScreen
 import com.example.newsapplication.presentation.theme.NewsApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale.Category
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -24,10 +27,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             NewsApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    NavHost(modifier = Modifier.padding(innerPadding))
+
                 }
             }
         }
@@ -35,17 +36,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun NavHost(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
+    androidx.navigation.compose.NavHost(navController , startDestination = Route.CATEGORY)  {
+        composable(Route.CATEGORY) {
+            CategoryScreen()
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NewsApplicationTheme {
-        Greeting("Android")
     }
 }
