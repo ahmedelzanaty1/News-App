@@ -1,5 +1,6 @@
 package com.example.newsapplication.presentation
 
+import CategoryScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.newsapplication.presentation.screens.categoryscreen.CategoryScreen
+import com.example.newsapplication.presentation.screens.SettingScreen.SettingScreen
 import com.example.newsapplication.presentation.theme.NewsApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale.Category
@@ -40,8 +41,10 @@ fun NavHost(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     androidx.navigation.compose.NavHost(navController , startDestination = Route.CATEGORY)  {
         composable(Route.CATEGORY) {
-            CategoryScreen()
+            CategoryScreen(navController = navController)
         }
-
+        composable(Route.SETTING) {
+            SettingScreen(navController = navController)
+        }
     }
 }
