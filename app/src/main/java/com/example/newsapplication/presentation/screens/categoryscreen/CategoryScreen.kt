@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.newsapplication.R
+import com.example.newsapplication.presentation.screens.categoryscreen.CategoriesItem
 import com.example.newsapplication.presentation.screens.componant.DrawerItem
 import com.example.newsapplication.presentation.screens.componant.DrawerSheet
 import com.example.newsapplication.presentation.screens.componant.TopToolBar
@@ -58,9 +59,17 @@ fun CategoryScreen(modifier: Modifier = Modifier , navController: NavController)
                 )
             }
         ) { innerPadding ->
+            CategoriesItem(modifier = Modifier.padding(innerPadding))
 
         }
     }
+}
+
+@Preview
+@Composable
+private fun show() {
+    CategoryScreen(navController = NavController(LocalContext.current))
+
 }
 
 

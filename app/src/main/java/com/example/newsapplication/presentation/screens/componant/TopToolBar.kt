@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -85,7 +86,7 @@ fun DrawerSheet(drawerState: DrawerState, navController: NavController) {
             )
         }
 
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.background(Color.White).fillMaxHeight()) {
             DrawerItem(
                 icon = R.drawable.menu_drawer,
                 text = "Category",
@@ -110,8 +111,7 @@ fun DrawerSheet(drawerState: DrawerState, navController: NavController) {
 @Composable
 fun DrawerItem(icon: Int, text: String, onClick: () -> Unit) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(.6f)
             .clickable { onClick() }
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -121,7 +121,7 @@ fun DrawerItem(icon: Int, text: String, onClick: () -> Unit) {
             contentDescription = text,
             modifier = Modifier.size(30.dp)
         )
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(10.dp))
         Text(text = text, fontSize = 18.sp, color = Color.Black)
     }
 }
