@@ -2,6 +2,7 @@ package com.example.newsapplication.presentation.screens.categoryscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -18,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CategoriesScreen() {
+fun CategoriesScreen(onCategorySelected: (String) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize(),
@@ -26,19 +27,25 @@ fun CategoriesScreen() {
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(categorylist) { category ->
-            CategoryItem(category)
+            CategoryItem(category){selectedCategory ->
+                onCategorySelected(selectedCategory)
+
+            }
         }
     }
 }
 
 @Composable
-fun CategoryItem(category: CategoriesData) {
+fun CategoryItem(category: CategoriesData , onCategoryClick: (String) -> Unit) {
     Box(
         modifier = Modifier.padding(7.dp)
             .fillMaxWidth(0.5f)
             .aspectRatio(1f)
             .background(category.color , shape = RoundedCornerShape(10.dp))
-            .padding(10.dp),
+            .padding(10.dp)
+            .clickable {
+                onCategoryClick(category.title)
+            },
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -61,9 +68,4 @@ fun CategoryItem(category: CategoriesData) {
     }
 }
 
-@Preview
-@Composable
-private fun shape() {
-    CategoriesScreen()
 
-}
