@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.newsapplication.presentation.screens.HomeScreen.HomeScreen
 import com.example.newsapplication.presentation.screens.SettingScreen.SettingScreen
 import com.example.newsapplication.presentation.theme.NewsApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +46,10 @@ fun NavHost(modifier: Modifier = Modifier) {
         }
         composable(Route.SETTING) {
             SettingScreen(navController = navController)
+        }
+        composable("${Route.HOME}/{category}") { backStackEntry ->
+            val category = backStackEntry.arguments?.getString("category") ?: "News"
+            HomeScreen(navController = navController, categoryName = category)
         }
     }
 }

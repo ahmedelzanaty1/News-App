@@ -14,15 +14,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.newsapplication.R
+import com.example.newsapplication.conestant.Route
 
 @Composable
-fun CategoriesItem(modifier: Modifier = Modifier) {
+fun CategoriesItem(modifier: Modifier = Modifier , navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -33,7 +36,13 @@ fun CategoriesItem(modifier: Modifier = Modifier) {
         ) {
             TextComponent()
             Spacer(modifier = Modifier.height(10.dp))
-            CategoriesScreen()
+            CategoriesScreen(
+                onCategorySelected = { selectedCategory ->
+                    navController.navigate("${Route.HOME}/$selectedCategory")
+
+                }
+
+            )
         }
     }
 }
@@ -63,6 +72,8 @@ fun TextComponent(modifier: Modifier = Modifier) {
 @Preview(showBackground = true , showSystemUi = true)
 @Composable
 private fun Category() {
-    CategoriesItem()
+    CategoriesItem(
+        navController = NavController(LocalContext.current)
+    )
 
 }
