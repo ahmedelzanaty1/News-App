@@ -67,6 +67,8 @@ dependencies {
     implementation (libs.converter.gson)
     //glide
     implementation (libs.glide.compose)
+    implementation(libs.okhttp)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     // splash api
     implementation(libs.androidx.core.splashscreen)
     // navigation
