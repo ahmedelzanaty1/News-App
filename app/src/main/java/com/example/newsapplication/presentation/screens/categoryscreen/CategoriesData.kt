@@ -34,7 +34,7 @@ val categorylist = listOf(
         image = R.drawable.bussines,
         color = brown
     ),CategoriesData(
-        title = "Enviroment",
+        title = "General",
         image = R.drawable.environment,
         color = babyblue
     ),CategoriesData(

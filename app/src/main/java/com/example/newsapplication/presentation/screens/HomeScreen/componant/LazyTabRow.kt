@@ -57,7 +57,7 @@ fun LazyTabRow(
                             source.name?.let {
                                 Text(
                                     text = it,
-                                    color = if (selectedIndex.intValue == index) Color.White else Color.Green
+                                    color = if (selectedIndex.intValue == index) Color.White else green
                                 )
                             }
                         }

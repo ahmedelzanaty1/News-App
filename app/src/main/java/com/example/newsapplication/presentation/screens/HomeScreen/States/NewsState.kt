@@ -1,4 +1,4 @@
-package com.example.newsapplication.presentation.screens.HomeScreen
+package com.example.newsapplication.presentation.screens.HomeScreen.States
 
 import com.example.newsapplication.domain.model.SourceModel
 
