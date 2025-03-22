@@ -12,11 +12,16 @@ import androidx.compose.runtime.Composable
 import com.example.newsapplication.conestant.Route
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.newsapplication.domain.model.ArticleModel
+import com.example.newsapplication.presentation.screens.DetailsScreen.DetailsScreen
 import com.example.newsapplication.presentation.screens.HomeScreen.HomeScreen
 import com.example.newsapplication.presentation.screens.SettingScreen.SettingScreen
 import com.example.newsapplication.presentation.theme.NewsApplicationTheme
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale.Category
 
@@ -51,5 +56,18 @@ fun NavHost(modifier: Modifier = Modifier) {
             val category = backStackEntry.arguments?.getString("category") ?: "News"
             HomeScreen(navController = navController, categoryName = category)
         }
+        composable(
+            route = "details/{articleJson}",
+            arguments = listOf(navArgument("articleJson") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val articleJson = backStackEntry.arguments?.getString("articleJson")
+
+            if (!articleJson.isNullOrEmpty()) {
+                val article = Gson().fromJson(articleJson, ArticleModel::class.java)
+                DetailsScreen(navController = navController, article = article)
+            }
+        }
+
+
     }
 }

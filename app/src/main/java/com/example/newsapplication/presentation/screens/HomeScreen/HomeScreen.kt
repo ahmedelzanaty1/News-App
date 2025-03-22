@@ -66,13 +66,13 @@ fun HomeScreen(navController: NavController, categoryName: String, viewModel: Ho
                 )
             }
         ) { innerPadding ->
-            NewsItem(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
+            NewsItem(modifier = Modifier.padding(innerPadding), viewModel = viewModel , navController = navController)
         }
     }
 }
 
 @Composable
-fun NewsItem(modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel()) {
+fun NewsItem(modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel() , navController: NavController) {
     val state = viewModel.state.value
     val articleState = viewModel.articleState.value
     Log.d("NewsItem", "Sources: ${state.sources}")
@@ -119,7 +119,7 @@ fun NewsItem(modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewM
                 LazyColumn {
                     items(articleState.sources) { article ->
                         article?.let {
-                            ArticleCard(article = it)
+                            ArticleCard(article = it , navController = navController)
                         }
                     }
                 }
