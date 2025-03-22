@@ -1,5 +1,7 @@
 package com.example.newsapplication.presentation.screens.HomeScreen.componant
 
+import android.net.Uri
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,28 +14,44 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import com.example.newsapplication.R
 import com.example.newsapplication.domain.model.ArticleModel
+import com.google.gson.Gson
+import java.nio.charset.StandardCharsets
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun ArticleCard(modifier: Modifier = Modifier, article: ArticleModel) {
-    Box (modifier = Modifier.fillMaxSize()){
-        Column (modifier = Modifier.fillMaxWidth().padding(8.dp)){
+fun ArticleCard(
+    modifier: Modifier = Modifier,
+    article: ArticleModel,
+    navController: NavController
+) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .clickable {
+                    val articleJson = Uri.encode(Gson().toJson(article), StandardCharsets.UTF_8.toString())
+                    navController.navigate("details/$articleJson")
+                }
+        ) {
             GlideImage(
                 model = article.urlToImage,
                 contentDescription = article.title,
-                modifier = Modifier.fillMaxWidth()
-                    .height(250.dp)
-                , loading = placeholder(R.drawable.logo)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp),
+                loading = placeholder(R.drawable.logo)
             )
             Text(
                 text = article.sourceName ?: "Unknown Author",
-                modifier = Modifier.padding(top = 8.dp)
-                , color = Color.Gray
+                modifier = Modifier.padding(top = 8.dp),
+                color = Color.Gray
             )
             Text(
                 text = article.title ?: "No Title",
@@ -46,5 +64,4 @@ fun ArticleCard(modifier: Modifier = Modifier, article: ArticleModel) {
             Divider(color = Color.Gray, thickness = 2.dp)
         }
     }
-
 }
