@@ -2,6 +2,7 @@ package com.example.newsapplication.presentation.screens.HomeScreen
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.newsapplication.R
+import com.example.newsapplication.conestant.Route
 import com.example.newsapplication.presentation.screens.HomeScreen.componant.ArticleCard
 import com.example.newsapplication.presentation.screens.HomeScreen.componant.LazyTabRow
 import com.example.newsapplication.presentation.screens.componant.DrawerSheet
@@ -61,7 +63,7 @@ fun HomeScreen(navController: NavController, categoryName: String, viewModel: Ho
                         scope.launch { drawerState.open() }
                     },
                     onSearchClick = {
-                        // Handle search icon click
+                        navController.navigate(Route.SEARCH)
                     }
                 )
             }
@@ -115,23 +117,28 @@ fun NewsItem(modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewM
                 color = Color.Red,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
+
             articleState.sources.isNotEmpty() -> {
                 LazyColumn {
                     items(articleState.sources) { article ->
                         article?.let {
-                            ArticleCard(article = it , navController = navController)
+                            ArticleCard(article = it, navController = navController)
                         }
                     }
                 }
 
             }
-            else -> Image(
-                painter = painterResource(id = R.drawable.not_found),
-                contentDescription = "No Data",
-                modifier = Modifier.height(200.dp).align(Alignment.CenterHorizontally)
-                , contentScale = ContentScale.Crop
-                , alignment = Alignment.Center
-            )
+
+            else -> Column (modifier = Modifier.fillMaxSize()
+                , verticalArrangement = Arrangement.Center){
+                Image(
+                    painter = painterResource(id = R.drawable.not_found),
+                    contentDescription = "No Data",
+                    modifier = Modifier.height(200.dp).align(Alignment.CenterHorizontally),
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.Center
+                )
+            }
         }
     }
 }

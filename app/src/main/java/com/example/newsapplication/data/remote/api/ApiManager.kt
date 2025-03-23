@@ -20,4 +20,12 @@ interface ApiManager {
         @Query("sources") sources: String,
     ) : ArticleResponse
 
+    @GET("everything")
+    suspend fun searchArticles(
+        @Query("apiKey") apiKey: String,
+        @Query("q") query: String,
+        @Query("page") page: Int
+    ) : ArticleResponse
+
+
 }
