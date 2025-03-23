@@ -19,6 +19,7 @@ import androidx.navigation.navArgument
 import com.example.newsapplication.domain.model.ArticleModel
 import com.example.newsapplication.presentation.screens.DetailsScreen.DetailsScreen
 import com.example.newsapplication.presentation.screens.HomeScreen.HomeScreen
+import com.example.newsapplication.presentation.screens.SearchScreen.SearchScreen
 import com.example.newsapplication.presentation.screens.SettingScreen.SettingScreen
 import com.example.newsapplication.presentation.theme.NewsApplicationTheme
 import com.google.gson.Gson
@@ -67,7 +68,9 @@ fun NavHost(modifier: Modifier = Modifier) {
                 DetailsScreen(navController = navController, article = article)
             }
         }
-
+        composable(Route.SEARCH) {
+            SearchScreen(navController = navController)
+        }
 
     }
 }

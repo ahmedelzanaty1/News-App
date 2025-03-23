@@ -18,4 +18,12 @@ class NewsRepositoryImpl @Inject constructor(
         return apiManager.getArticles(apiKey = Constants.API_KEY , sources = sources)
     }
 
+    override suspend fun searchArticles(query: String , page: Int): ArticleResponse {
+        return apiManager.searchArticles(
+            query = query ,
+            apiKey = Constants.API_KEY,
+            page = page
+        )
+    }
+
 }
