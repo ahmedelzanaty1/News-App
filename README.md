@@ -1,0 +1,1 @@
+Linkedin post : https://www.linkedin.com/posts/ahmed-elzanaty-429991250_androiddevelopment-kotlin-jetpackcompose-activity-7309556155104567296-rkqw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFZKKKABBVO9mpZ7MQ0eUynBdIP83D6dtu4
